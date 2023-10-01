@@ -1,13 +1,25 @@
-export type Todo = {
-    userId: number;
-    id: number;
-    title: string;
-    completed: boolean;
+import { Models } from "appwrite";
+
+interface Board{
+    columns:Map<TypedColumn,Column>
 }
 
+type TypedColumn = "todo" | "inprogress" | "done";
 
-export interface IProducts {
-    id?: number;
-    product: string;
-    price: string;
+interface Column {
+    id: TypedColumn,
+    todos: Todo[]
+}
+
+interface Todo {
+    $id: string,
+    $createdAt: string,
+    title: string,
+    status: TypedColumn,
+    image?:Image
+}
+
+interface Image{
+    bucketId: string;
+    fileId:string
 }
